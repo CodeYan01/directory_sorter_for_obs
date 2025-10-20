@@ -168,7 +168,11 @@ def script_update(settings):
         new_check_interval = obs.obs_data_get_int(
             settings, ScriptProperties.check_interval
         )
-        directory = Path(obs.obs_data_get_string(settings, ScriptProperties.directory))
+        _directory = obs.obs_data_get_string(settings, ScriptProperties.directory)
+
+        if _directory != "":
+            directory = Path(_directory)
+
         i = obs.obs_data_get_int(settings, ScriptProperties.sort_mode)
         if any(x.value == i for x in SortMode):
             sort_mode = SortMode(i)
