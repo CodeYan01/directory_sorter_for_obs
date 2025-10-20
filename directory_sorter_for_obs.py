@@ -303,10 +303,11 @@ def on_timer():
         orig_items = items.copy()
 
         # Remove non-existent items
-        for i, item in enumerate(reversed(items)):
+        items_len = len(items)
+        for i, item in enumerate(reversed(items), start=1):
             item_as_path = Path(item["value"])
             if not item_as_path.exists():
-                items.pop(i)
+                items.pop(items_len - i)
 
         # Add items
         for child in children:
